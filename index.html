@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Valiantwaves builds industry-grade AI software products for pharma manufacturing and supply chain, including BioSync OS and Medical AI.">
+<meta name="theme-color" content="#0A1530">
+<title>Valiantwaves · Software that thinks. AI that builds.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky hero with live wave canvas → dark BioSync panel rises over it (rounded top)
+   → pinned "pop-out" screen showcase with dimmed surroundings → pinned word-by-word statement
+   → feature grid → wave divider → light Medical AI flow (scroll-drawn line) → navy "How we build"
+   stacking cards → contact. Every class is prefixed vw- so Zoho's theme CSS can't collide. */
+:root{
+  --navy:#2F4573;      /* from the VW logo band */
+  --ink:#0A1530;
+  --night:#050A17;
+  --paper:#F3F6FB;
+  --card:#FFFFFF;
+  --line:#D7DEEA;
+  --muted:#56637C;
+  --aqua:#14D2C2;      /* BioSync */
+  --coral:#FF6A3D;     /* Medical AI */
+  --sun:#FFC53D;       /* small highlights */
+  --on-dark:#EAF0FA;
+  --on-dark-mute:#97A6C3;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --wrap:1200px;
+  color-scheme:light;
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+.vw{position:relative;overflow-x:clip;background:var(--paper);color:var(--ink);font-family:var(--body)}
+.vw *,.vw *::before,.vw *::after{box-sizing:border-box}
+.vw h1,.vw h2,.vw h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.025em;line-height:1.04}
+.vw p{margin:0}
+.vw ul{margin:0;padding:0;list-style:none}
+.vw-in{max-width:var(--wrap);margin:0 auto;padding-left:max(18px, env(safe-area-inset-left,0px));padding-right:max(18px, env(safe-area-inset-right,0px));width:100%}
+.vw-eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;color:var(--navy)}
+.vw-eyebrow::before{content:"";width:24px;height:2px;background:currentColor}
+.vw-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--sun);color:var(--ink);padding:2px 7px;border-radius:3px;font-weight:500;vertical-align:middle}
+.vw :focus-visible{outline:2px solid var(--aqua);outline-offset:3px}
+.vw-sec{scroll-margin-top:64px}
+
+/* reveal on scroll */
+.vw-js .vw-rv{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.vw-js .vw-rv.is-in{opacity:1;transform:none}
+.vw-js .vw-rv[data-d="1"]{transition-delay:.08s}.vw-js .vw-rv[data-d="2"]{transition-delay:.16s}.vw-js .vw-rv[data-d="3"]{transition-delay:.24s}.vw-js .vw-rv[data-d="4"]{transition-delay:.32s}.vw-js .vw-rv[data-d="5"]{transition-delay:.4s}
+
+/* ---------- NAV ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+.vw-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;transition:background .4s,border-color .4s,color .4s;background:rgba(243,246,251,.78);backdrop-filter:saturate(1.5) blur(12px);-webkit-backdrop-filter:saturate(1.5) blur(12px);border-bottom:1px solid rgba(10,21,48,.08);color:var(--ink)}
+.vw-nav.is-dark{background:rgba(5,10,23,.66);border-bottom-color:rgba(255,255,255,.08);color:var(--on-dark)}
+.vw-nav .vw-in{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.vw .vw-logo{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.02em;color:inherit}
+.vw-logo svg{flex:none;border-radius:8px;box-shadow:0 2px 8px rgba(10,21,48,.18)}
+.vw-links{display:flex;gap:2px;align-items:center}
+.vw .vw-links a{text-decoration:none;font-size:14.5px;font-weight:500;padding:8px 13px;border-radius:999px;color:inherit;opacity:.72;transition:opacity .2s,background .2s}
+.vw .vw-links a:hover,.vw .vw-links a.is-on{opacity:1;background:rgba(47,69,115,.1)}
+.vw-nav.is-dark .vw-links a:hover,.vw-nav.is-dark .vw-links a.is-on{background:rgba(255,255,255,.1)}
+.vw .vw-links a.vw-navcta{opacity:1;background:var(--coral);color:#fff;margin-left:8px;font-weight:600}
+.vw .vw-links a.vw-navcta:hover{background:#ff5522}
+.vw-burger{display:none;background:none;border:1px solid currentColor;border-radius:10px;width:42px;height:42px;cursor:pointer;align-items:center;justify-content:center;color:inherit;opacity:.85}
+.vw-burger span,.vw-burger span::before,.vw-burger span::after{display:block;width:18px;height:2px;background:currentColor;position:relative;transition:transform .3s}
+.vw-burger span::before,.vw-burger span::after{content:"";position:absolute;left:0}
+.vw-burger span::before{top:-6px}.vw-burger span::after{top:6px}
+.vw-burger[aria-expanded="true"] span{background:transparent}
+.vw-burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.vw-burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+@media (max-width:860px){
+  .vw-burger{display:inline-flex}
+  .vw-links{position:absolute;left:0;right:0;top:64px;flex-direction:column;align-items:stretch;gap:2px;background:var(--paper);color:var(--ink);border-bottom:1px solid var(--line);padding:10px max(18px, env(safe-area-inset-left,0px)) 18px;display:none;box-shadow:0 20px 40px -20px rgba(10,21,48,.3)}
+  .vw-links.is-open{display:flex}
+  .vw .vw-links a{padding:13px 14px;border-radius:10px;font-size:16px}
+  .vw .vw-links a.vw-navcta{margin:8px 0 0;text-align:center}
+}
+
+/* ---------- HERO ---------- */
+.vw-hero{position:sticky;top:0;height:100vh;height:100svh;min-height:560px;z-index:0;display:flex;flex-direction:column;overflow:hidden;background:var(--paper);margin-top:-64px;padding-top:64px}
+.vw-hero-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vw-hero-shade{position:absolute;inset:0;background:var(--night);opacity:calc(var(--h,0)*.55);pointer-events:none}
+.vw-hero-in{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding-block:24px 120px;transform:translateY(calc(var(--h,0)*-70px)) scale(calc(1 - var(--h,0)*.06));opacity:calc(1 - var(--h,0)*.9);will-change:transform,opacity}
+.vw-hero h1{font-size:clamp(46px,8.6vw,118px);font-weight:800;max-width:12ch;margin-top:22px;line-height:.98}
+.vw-line{display:block;overflow:hidden;padding-bottom:.08em}
+.vw-line > span{display:inline-block;animation:vwRise 1s cubic-bezier(.2,.8,.2,1) both}
+.vw-line:nth-child(2) > span{animation-delay:.14s}
+@keyframes vwRise{from{transform:translateY(105%)}to{transform:none}}
+.vw-mark{position:relative;white-space:nowrap}
+.vw-mark::after{content:"";position:absolute;left:-.04em;right:-.04em;bottom:.08em;height:.28em;background:var(--aqua);z-index:-1;transform-origin:left;animation:vwMark .9s .9s cubic-bezier(.7,0,.2,1) both;opacity:.85}
+.vw-mark--coral::after{background:var(--coral);animation-delay:1.1s;opacity:.75}
+.vw-h1wrap{position:relative;z-index:0}
+@keyframes vwMark{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.vw-hero-lede{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:48ch;margin-top:26px;animation:vwFade 1s .5s both}
+.vw-hero-lede b{color:var(--ink);font-weight:600}
+@keyframes vwFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vw-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;animation:vwFade 1s .7s both}
+.vw .vw-btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:15.5px;padding:14px 22px;border-radius:999px;transition:transform .25s,box-shadow .25s,background .25s,color .25s;border:1.5px solid transparent;cursor:pointer;font-family:var(--body)}
+.vw .vw-btn:hover{transform:translateY(-3px)}
+.vw .vw-btn--aqua{background:var(--aqua);color:var(--ink);box-shadow:0 10px 30px -10px rgba(20,210,194,.8)}
+.vw .vw-btn--aqua:hover{box-shadow:0 16px 36px -10px rgba(20,210,194,.95)}
+.vw .vw-btn--ghost{border-color:var(--ink);color:var(--ink);background:rgba(255,255,255,.6)}
+.vw .vw-btn--ghost:hover{background:var(--ink);color:#fff}
+.vw-btn svg{transition:transform .25s}
+.vw .vw-btn:hover svg{transform:translateX(4px)}
+.vw-cue{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:calc(1 - var(--h,0)*3)}
+.vw-cue i{width:1.5px;height:34px;background:linear-gradient(var(--ink),transparent);animation:vwCue 1.8s infinite}
+@keyframes vwCue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.vw-ticker{position:absolute;left:0;right:0;bottom:0;border-top:1px solid rgba(10,21,48,.1);background:rgba(255,255,255,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow:hidden;padding-block:14px}
+.vw-ticker-track{display:flex;width:max-content;animation:vwTick 38s linear infinite}
+.vw-ticker span{font-family:var(--mono);font-size:13px;white-space:nowrap;padding:0 22px;color:var(--ink);display:inline-flex;align-items:center;gap:22px}
+.vw-ticker span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral)}
+.vw-ticker span:nth-child(3n+2)::after{background:var(--aqua)}
+.vw-ticker span:nth-child(3n)::after{background:var(--navy)}
+@keyframes vwTick{to{transform:translateX(-50%)}}
+
+/* ---------- OVER (everything that slides over the hero) ---------- */
+.vw-over{position:relative;z-index:2}
+
+/* ---------- BIOSYNC ---------- */
+.vw-bio{background:var(--ink);color:var(--on-dark);border-radius:36px 36px 0 0;box-shadow:0 -30px 80px -20px rgba(5,10,23,.5);position:relative}
+.vw-bio .vw-eyebrow{color:var(--aqua)}
+.vw-bio-intro{padding-block:clamp(72px,10vw,130px) clamp(40px,6vw,80px)}
+.vw-giant{font-family:var(--display);font-weight:800;font-size:clamp(52px,15vw,250px);line-height:.88;letter-spacing:-.05em;margin-top:14px;
+  color:transparent;-webkit-text-stroke:1.5px rgba(234,240,250,.35);
+  background:linear-gradient(90deg,var(--aqua) 0%,#7CF3E8 calc(var(--fill,0)*100%),transparent calc(var(--fill,0)*100% + .5%));
+  -webkit-background-clip:text;background-clip:text;white-space:nowrap}
+.vw-bio-lead{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(24px,5vw,72px);align-items:end;margin-top:clamp(28px,4vw,48px)}
+.vw-bio-lead h2{font-size:clamp(30px,4.6vw,58px);font-weight:800;color:#fff}
+.vw-bio-lead h2 em{font-style:normal;color:var(--aqua)}
+.vw-bio-lead p{color:var(--on-dark-mute);font-size:17.5px;max-width:52ch}
+.vw-bio-lead p b{color:var(--on-dark);font-weight:500}
+@media (max-width:900px){.vw-bio-lead{grid-template-columns:1fr}}
+
+/* Pop-out showcase */
+.vw-show{position:relative;height:640vh}
+.vw-show-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center}
+.vw-show-dim{position:absolute;inset:0;background:var(--night);opacity:calc(var(--enter,0)*.92);pointer-events:none}
+.vw-show-glow{position:absolute;left:58%;top:52%;width:min(1100px,140vw);aspect-ratio:1;max-width:none;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(20,210,194,.28),rgba(47,69,115,.18) 55%,transparent 72%);opacity:var(--enter,0);pointer-events:none}
+.vw-show-lead{position:absolute;top:13%;left:0;right:0;text-align:center;opacity:calc(1 - var(--enter,0)*2.2);transform:translateY(calc(var(--enter,0)*-40px));pointer-events:none}
+.vw-show-lead h3{font-size:clamp(28px,4.4vw,56px);font-weight:800;color:#fff}
+.vw-show-lead p{font-family:var(--mono);font-size:13px;color:var(--aqua);margin-top:12px;letter-spacing:.1em;text-transform:uppercase}
+.vw-show-grid{position:relative;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.5fr);gap:clamp(24px,4vw,64px);align-items:center}
+.vw-stage{opacity:calc((var(--enter,0) - .55)*2.4);transform:translateX(calc((1 - var(--enter,0))*-40px));min-width:0}
+.vw-st-box{position:relative;min-height:270px}
+.vw-st{position:absolute;inset:0 0 auto;opacity:0;transform:translateY(24px);transition:opacity .55s,transform .55s;pointer-events:none}
+.vw-st.is-on{opacity:1;transform:none;pointer-events:auto}
+.vw-st-k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--aqua);text-transform:uppercase}
+.vw-st h3{font-size:clamp(26px,3vw,40px);font-weight:800;color:#fff;margin-top:10px}
+.vw-st p{color:var(--on-dark-mute);margin-top:12px;font-size:16.5px}
+.vw-rail{display:flex;flex-direction:column;gap:4px;margin-top:22px}
+.vw-rail button{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;color:var(--on-dark-mute);padding:6px 0;transition:color .3s}
+.vw-rail button i{width:28px;height:2px;background:rgba(255,255,255,.18);position:relative;overflow:hidden;transition:width .4s}
+.vw-rail button i::after{content:"";position:absolute;inset:0;background:var(--aqua);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.vw-rail button.is-on{color:#fff}
+.vw-rail button.is-on i{width:52px}
+.vw-rail button.is-on i::after,.vw-rail button.is-done i::after{transform:scaleX(1)}
+.vw-rail button:focus-visible{outline:2px solid var(--aqua);outline-offset:3px}
+
+.vw-screen-wrap{perspective:1600px;min-width:0}
+.vw-screen{position:relative;border-radius:16px;overflow:hidden;max-width:100%;background:#0E1A33;border:1px solid rgba(255,255,255,.12);
+  transform:translateY(calc((1 - var(--enter,0))*22%)) rotateX(calc((1 - var(--enter,0))*28deg)) scale(calc(.6 + var(--enter,0)*.4));
+  transform-origin:50% 100%;box-shadow:0 calc(var(--enter,0)*60px) calc(var(--enter,0)*140px) -30px rgba(20,210,194,.45),0 40px 80px -30px rgba(0,0,0,.7);will-change:transform}
+.vw-screen-body{position:relative;aspect-ratio:1600/874;max-width:100%;background:#F7F8FB}
+.vw-bar{position:relative;height:32px;display:flex;align-items:center;gap:6px;padding:0 14px;background:#121F3B;z-index:4;border-bottom:1px solid rgba(255,255,255,.08)}
+.vw-bar i{width:9px;height:9px;border-radius:50%;background:#3A4F73}
+.vw-bar i:first-child{background:var(--coral)}.vw-bar i:nth-child(2){background:var(--sun)}.vw-bar i:nth-child(3){background:var(--aqua)}
+.vw-bar small{margin-left:12px;font-family:var(--mono);font-size:11px;color:var(--on-dark-mute)}
+.vw-sl{position:absolute;inset:0;clip-path:inset(100% 0 0 0);transition:clip-path .85s cubic-bezier(.77,0,.18,1);z-index:1;background:#F7F8FB}
+.vw-sl.is-on{clip-path:inset(0 0 0 0);z-index:3}
+.vw-sl.is-out{clip-path:inset(0 0 0 0);z-index:2}
+.vw-sl .vw-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;display:none}
+.vw-sl.has-img .vw-img{display:block}
+.vw-sl.has-img .vw-ph{display:none}
+.vw-pin{position:absolute;z-index:5;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:clamp(9.5px,1.1vw,12px);color:var(--ink);background:var(--aqua);padding:5px 10px 5px 6px;border-radius:999px;opacity:0;transform:translateY(8px) scale(.9);transition:opacity .4s .6s,transform .4s .6s;white-space:nowrap;box-shadow:0 8px 24px -8px rgba(20,210,194,.9)}
+.vw-pin::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 0 rgba(10,21,48,.6);animation:vwPulse 1.6s infinite}
+.vw-pin--b{transition-delay:.9s;background:var(--sun)}
+.vw-sl.is-on .vw-pin{opacity:1;transform:none}
+@keyframes vwPulse{0%{box-shadow:0 0 0 0 rgba(10,21,48,.55)}100%{box-shadow:0 0 0 9px rgba(10,21,48,0)}}
+
+/* shown only if a screenshot link is missing */
+.vw-ph{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:var(--muted);background:repeating-linear-gradient(135deg,#F7F8FB 0 14px,#EEF2F7 14px 28px)}
+
+@media (max-width:860px){
+  .vw-show{height:580vh}
+  .vw-show-grid{grid-template-columns:1fr;gap:18px}
+  .vw-stage{order:2;transform:none}
+  .vw-st-box{min-height:200px}
+  .vw-st h3{font-size:24px}.vw-st p{font-size:15px;margin-top:6px}
+  .vw-rail{flex-direction:row;gap:8px;margin-top:6px}
+  .vw-rail button span{display:none}
+  .vw-rail button i{width:22px}.vw-rail button.is-on i{width:40px}
+  .vw-show-lead{top:16%}
+  .vw-pin{display:none}
+  .vw-sl.is-on .vw-pin--m{display:flex}
+}
+
+/* Statement */
+.vw-say{position:relative;height:230vh}
+.vw-say-stick{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center}
+.vw-say-k{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun)}
+.vw-say h2{font-size:clamp(38px,7vw,96px);font-weight:800;margin-top:22px;max-width:16ch;line-height:1}
+.vw-w{color:rgba(234,240,250,.16);transition:color .35s}
+.vw-w.is-lit{color:#fff}
+.vw-w.is-lit.vw-w--a{color:var(--aqua)}
+.vw-say p{max-width:60ch;margin-top:28px;color:var(--on-dark-mute);font-size:17px}
+
+/* Features */
+.vw-feats-sec{padding-block:clamp(40px,7vw,100px) clamp(60px,8vw,110px)}
+.vw-feats-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.vw-feats-head h2{font-size:clamp(30px,4.2vw,52px);font-weight:800;color:#fff;max-width:18ch}
+.vw-feats-head p{color:var(--on-dark-mute);max-width:40ch}
+.vw-feats{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.vw-feat{position:relative;background:#0F1D3D;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px 26px;display:flex;flex-direction:column;gap:12px;min-width:0;overflow:hidden;transition:transform .35s,border-color .35s}
+.vw-feat::before{content:"";position:absolute;inset:0;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),rgba(20,210,194,.16),transparent 60%);opacity:0;transition:opacity .35s;pointer-events:none}
+.vw-feat:hover{transform:translateY(-6px);border-color:rgba(20,210,194,.5)}
+.vw-feat:hover::before{opacity:1}
+.vw-ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(20,210,194,.12);color:var(--aqua)}
+.vw-feat:nth-child(3n+2) .vw-ico{background:rgba(255,197,61,.12);color:var(--sun)}
+.vw-feat:nth-child(3n) .vw-ico{background:rgba(255,106,61,.12);color:var(--coral)}
+.vw-feat h3{font-size:21px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.vw-feat p{color:var(--on-dark-mute);font-size:15.5px}
+.vw-feat-k{font-family:var(--mono);font-size:11.5px;color:var(--on-dark-mute);letter-spacing:.08em;margin-top:auto;padding-top:6px}
+@media (max-width:960px){.vw-feats{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.vw-feats{grid-template-columns:1fr}}
+.vw-chips{margin-top:44px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.vw-chips-track{display:flex;gap:10px;width:max-content;animation:vwTick 30s linear infinite reverse}
+.vw-chip{font-family:var(--mono);font-size:13px;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 16px;color:var(--on-dark);display:inline-flex;gap:9px;align-items:center;white-space:nowrap}
+.vw-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--aqua)}
+
+/* wave divider */
+.vw-waves{display:block;width:100%;height:clamp(60px,9vw,130px);margin-bottom:-1px}
+.vw-waves .w1{animation:vwWave 9s ease-in-out infinite alternate}
+.vw-waves .w2{animation:vwWave 7s ease-in-out infinite alternate-reverse}
+@keyframes vwWave{to{transform:translateX(-60px)}}
+
+/* ---------- MEDICAL ---------- */
+.vw-med{background:var(--paper);color:var(--ink);padding-block:clamp(40px,7vw,90px) clamp(90px,12vw,160px);position:relative}
+.vw-med .vw-eyebrow{color:var(--coral)}
+.vw-med-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(32px,6vw,90px);align-items:start}
+.vw-med-sticky{position:sticky;top:110px}
+.vw-med h2{font-size:clamp(34px,5vw,64px);font-weight:800;margin-top:18px}
+.vw-med h2 em{font-style:normal;color:var(--coral)}
+.vw-med-lede{color:var(--muted);margin-top:20px;font-size:17.5px;max-width:48ch}
+.vw-scan{margin-top:34px;position:relative;width:min(300px,70vw);aspect-ratio:1;max-width:100%}
+.vw-scan-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--line);background:radial-gradient(circle,rgba(255,106,61,.12),transparent 62%)}
+.vw-scan-ring:nth-child(2){inset:16%;border-style:dashed}
+.vw-scan-ring:nth-child(3){inset:32%;background:radial-gradient(circle,rgba(47,69,115,.18),transparent 70%)}
+.vw-scan-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,106,61,.45),rgba(255,106,61,0) 22%,transparent);animation:vwSpin 4.5s linear infinite}
+@keyframes vwSpin{to{transform:rotate(360deg)}}
+.vw-scan-c{position:absolute;inset:44%;border-radius:50%;background:var(--coral);box-shadow:0 0 0 8px rgba(255,106,61,.18)}
+.vw-scan-l{position:absolute;font-family:var(--mono);font-size:11px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap;color:var(--ink);box-shadow:0 6px 18px -8px rgba(10,21,48,.3)}
+.vw-flowcol{position:relative;padding-left:46px}
+.vw-flowline{position:absolute;left:15px;top:10px;bottom:10px;width:3px;border-radius:2px;background:var(--line)}
+.vw-flowline::after{content:"";position:absolute;inset:0;border-radius:2px;background:linear-gradient(var(--coral),var(--sun) 60%,var(--aqua));transform-origin:top;transform:scaleY(var(--mp,0))}
+.vw-step{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 26px 24px;margin-bottom:22px;transition:border-color .4s,box-shadow .4s,transform .4s}
+.vw-step::before{content:"";position:absolute;left:-39px;top:30px;width:17px;height:17px;border-radius:50%;background:var(--paper);border:3px solid var(--line);transition:border-color .4s,background .4s,box-shadow .4s}
+.vw-step.is-lit{border-color:rgba(255,106,61,.5);box-shadow:0 24px 50px -30px rgba(255,106,61,.55);transform:translateX(4px)}
+.vw-step.is-lit::before{border-color:var(--coral);background:var(--coral);box-shadow:0 0 0 6px rgba(255,106,61,.18)}
+.vw-step-k{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--coral);text-transform:uppercase}
+.vw-step h3{font-size:24px;font-weight:700;margin-top:6px}
+.vw-step p{color:var(--muted);margin-top:8px;font-size:15.5px}
+.vw-step-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.vw-step-tags span{font-family:var(--mono);font-size:11.5px;padding:4px 10px;border-radius:6px;background:var(--paper);border:1px solid var(--line)}
+@media (max-width:900px){.vw-med-grid{grid-template-columns:1fr}.vw-med-sticky{position:static}.vw-scan{width:220px}}
+/* Hidden gallery: appears by itself once Medical AI screenshot links are filled in */
+.vw-medgal{margin-top:48px;display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px}
+.vw-medgal figure{margin:0;flex:0 0 min(78%,640px);scroll-snap-align:start;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.vw-medgal img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.vw-medgal figcaption{padding:12px 16px;font-size:14px;color:var(--muted)}
+
+/* ---------- HOW WE BUILD ---------- */
+.vw-build{background:var(--navy);color:var(--on-dark);border-radius:36px 36px 0 0;margin-top:-36px;position:relative;padding-block:clamp(72px,10vw,120px) clamp(60px,8vw,100px);overflow:clip}
+.vw-build::before{content:"";position:absolute;right:-20%;top:-10%;width:70%;aspect-ratio:1;background:radial-gradient(closest-side,rgba(20,210,194,.22),transparent);pointer-events:none}
+.vw-build .vw-eyebrow{color:var(--sun)}
+.vw-build-head{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:end;position:relative}
+.vw-build-head h2{font-size:clamp(34px,5.2vw,68px);font-weight:800;color:#fff;margin-top:18px}
+.vw-build-head h2 em{font-style:normal;color:var(--sun)}
+.vw-build-head p{color:#C3CEE3;font-size:17px;max-width:48ch}
+@media (max-width:860px){.vw-build-head{grid-template-columns:1fr}}
+.vw-stack{margin-top:56px;display:flex;flex-direction:column;gap:28px;position:relative}
+.vw-card{position:sticky;top:calc(96px + var(--i)*16px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);border-radius:26px;overflow:hidden;background:var(--card);color:var(--ink);min-height:300px;box-shadow:0 -20px 50px -20px rgba(5,10,23,.45);transform:scale(calc(1 - var(--cov,0)*.05));transform-origin:50% 0;filter:brightness(calc(1 - var(--cov,0)*.25))}
+.vw-card-panel{padding:30px;display:flex;flex-direction:column;justify-content:space-between;gap:20px;min-width:0}
+.vw-card:nth-child(1) .vw-card-panel{background:var(--aqua)}
+.vw-card:nth-child(2) .vw-card-panel{background:var(--sun)}
+.vw-card:nth-child(3) .vw-card-panel{background:var(--coral);color:#fff}
+.vw-card:nth-child(4) .vw-card-panel{background:#8FB3FF}
+.vw-card:nth-child(5) .vw-card-panel{background:var(--ink);color:#fff}
+.vw-card-n{font-family:var(--mono);font-size:13px;letter-spacing:.14em;white-space:nowrap}
+.vw-card-big{font-family:var(--display);font-weight:800;font-size:clamp(48px,7vw,92px);line-height:.9;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.vw-card-unit{font-family:var(--mono);font-size:13px;margin-top:8px;display:block;opacity:.85}
+.vw-card-body{padding:34px clamp(22px,3.4vw,46px);display:flex;flex-direction:column;justify-content:center;gap:12px;min-width:0}
+.vw-card-body h3{font-size:clamp(24px,2.8vw,36px);font-weight:800}
+.vw-card-body p{color:var(--muted);font-size:16.5px;max-width:52ch}
+.vw-card-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.vw-card-list li{font-family:var(--mono);font-size:12px;padding:5px 11px;border-radius:999px;background:var(--paper);border:1px solid var(--line)}
+@media (max-width:760px){
+  .vw-card{grid-template-columns:1fr;top:calc(80px + var(--i)*12px);min-height:0}
+  .vw-card-panel{flex-direction:row;align-items:flex-end;padding:22px 22px 18px}
+  .vw-card-big{font-size:52px}
+  .vw-card-body{padding:22px}
+}
+
+/* ---------- CONTACT ---------- */
+.vw-contact{background:linear-gradient(180deg,var(--navy) 0,var(--ink) 220px,var(--night));color:var(--on-dark);padding-block:clamp(70px,10vw,130px) 36px;position:relative;overflow:clip}
+.vw-contact .vw-eyebrow{color:var(--coral)}
+.vw-contact h2{font-size:clamp(40px,7.4vw,104px);font-weight:800;color:#fff;margin-top:18px;max-width:14ch;line-height:.98}
+.vw-contact h2 em{font-style:normal;background:linear-gradient(90deg,var(--aqua),var(--sun),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
+.vw-contact-cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+.vw .vw-btn--coral{background:var(--coral);color:#fff;box-shadow:0 12px 34px -10px rgba(255,106,61,.8)}
+.vw-cards{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.vw-cc{border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px;background:rgba(255,255,255,.03);min-width:0;transition:border-color .3s,background .3s}
+.vw-cc:hover{border-color:rgba(20,210,194,.5);background:rgba(20,210,194,.05)}
+.vw-cc small{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-mute)}
+.vw-cc-v{font-size:clamp(17px,1.8vw,20px);font-weight:600;color:#fff;word-break:break-word;user-select:all}
+.vw-cc-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.vw .vw-cc-row a,.vw-copy{font-family:var(--mono);font-size:12px;color:var(--aqua);background:none;border:1px solid rgba(20,210,194,.4);border-radius:999px;padding:5px 12px;cursor:pointer;text-decoration:none}
+.vw .vw-cc-row a:hover,.vw-copy:hover{background:rgba(20,210,194,.12)}
+@media (max-width:820px){.vw-cards{grid-template-columns:1fr}}
+.vw-foot{margin-top:80px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--on-dark-mute);font-family:var(--mono)}
+.vw-foot-word{font-family:var(--display);font-weight:800;font-size:clamp(48px,13vw,210px);letter-spacing:-.05em;line-height:.8;margin-top:60px;color:transparent;-webkit-text-stroke:1px rgba(234,240,250,.14);white-space:nowrap;text-align:center}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .vw *,.vw *::before,.vw *::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .vw-js .vw-rv{opacity:1;transform:none}
+}
+</style>
+
+</head>
+<body>
+<div class="vw" id="vw">
+
+<!-- ================= NAV ================= -->
+<header class="vw-nav" id="vw-nav">
+  <div class="vw-in">
+    <a class="vw-logo" href="#vw-home" aria-label="Valiantwaves home">
+      <!-- VW logo (swap for the uploaded logo image in Zoho if you prefer: <img src="YOUR-LOGO-URL" width="36" height="36" alt="">) -->
+      <svg width="36" height="36" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="vwlg" x1="0" x2="1"><stop offset="0" stop-color="#2A3D69"/><stop offset="1" stop-color="#435A82"/></linearGradient></defs><rect width="40" height="40" rx="8" fill="#fff"/><rect y="11" width="40" height="18" fill="url(#vwlg)"/><text x="20" y="26" text-anchor="middle" font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900" font-size="16" fill="#fff" letter-spacing="-.5">VW</text></svg>
+      Valiantwaves
+    </a>
+    <button class="vw-burger" id="vw-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="vw-links"><span></span></button>
+    <nav class="vw-links" id="vw-links">
+      <a href="#vw-home">Home</a>
+      <a href="#vw-biosync">BioSync</a>
+      <a href="#vw-medical">Medical AI</a>
+      <a href="#vw-build">How we build</a>
+      <a class="vw-navcta" href="#vw-contact" data-vw-demo>Book a demo</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="vw-hero vw-sec" id="vw-home" data-tone="light">
+  <canvas class="vw-hero-cv" id="vw-cv" aria-hidden="true"></canvas>
+  <div class="vw-hero-shade"></div>
+  <div class="vw-in vw-hero-in">
+    <span class="vw-eyebrow">Valiantwaves · AI product studio</span>
+    <h1 class="vw-h1wrap">
+      <span class="vw-line"><span>Software that <span class="vw-mark">thinks.</span></span></span>
+      <span class="vw-line"><span>AI that <span class="vw-mark vw-mark--coral">builds.</span></span></span>
+    </h1>
+    <p class="vw-hero-lede">Industry-grade AI software products for <b>pharma manufacturing</b> and <b>supply chain</b>.</p>
+    <div class="vw-actions">
+      <a class="vw-btn vw-btn--aqua" href="#vw-biosync">Explore BioSync OS <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="vw-btn vw-btn--ghost" href="#vw-medical">Medical AI</a>
+    </div>
+  </div>
+  <div class="vw-cue" aria-hidden="true">Scroll<i></i></div>
+  <div class="vw-ticker" aria-label="Product capabilities">
+    <div class="vw-ticker-track">
+      <span>Electronic batch records</span><span>SOP → MBR compiler</span><span>21 CFR Part 11 e-signatures</span><span>Hash-chained audit trail</span><span>Cited AI answers</span><span>AI proposals</span><span>GS1 serialization</span><span>CAPA &amp; change control</span><span>LIMS</span><span>Warehouse management</span><span>Brain tumour segmentation</span><span>Medical report analysis</span><span>DICOM &amp; NIfTI</span>
+      <span aria-hidden="true">Electronic batch records</span><span aria-hidden="true">SOP → MBR compiler</span><span aria-hidden="true">21 CFR Part 11 e-signatures</span><span aria-hidden="true">Hash-chained audit trail</span><span aria-hidden="true">Cited AI answers</span><span aria-hidden="true">AI proposals</span><span aria-hidden="true">GS1 serialization</span><span aria-hidden="true">CAPA &amp; change control</span><span aria-hidden="true">LIMS</span><span aria-hidden="true">Warehouse management</span><span aria-hidden="true">Brain tumour segmentation</span><span aria-hidden="true">Medical report analysis</span><span aria-hidden="true">DICOM &amp; NIfTI</span>
+    </div>
+  </div>
+</section>
+
+<div class="vw-over">
+
+<!-- ================= BIOSYNC ================= -->
+<section class="vw-bio vw-sec" id="vw-biosync" data-tone="dark">
+  <div class="vw-in vw-bio-intro">
+    <span class="vw-eyebrow vw-rv">Flagship product</span>
+    <div class="vw-giant" id="vw-giant" aria-label="BioSync OS">BioSync OS</div>
+    <div class="vw-bio-lead">
+      <h2 class="vw-rv">The batch record that <em>writes itself</em> and still passes audit.</h2>
+      <p class="vw-rv" data-d="2">A GxP manufacturing execution system for pharma. <b>Batch records, shop-floor execution, quality and warehouse</b> in one validated platform, with an AI layer that drafts the paperwork so your people can focus on the product.</p>
+    </div>
+  </div>
+
+  <!-- Pop-out showcase: pinned while you scroll through 6 screens -->
+  <div class="vw-show" id="vw-show">
+    <div class="vw-show-stick">
+      <div class="vw-show-dim"></div>
+      <div class="vw-show-glow"></div>
+      <div class="vw-show-lead"><h3>Step inside BioSync.</h3><p>Keep scrolling</p></div>
+      <div class="vw-in vw-show-grid">
+        <div class="vw-stage">
+          <div class="vw-st-box" aria-live="polite">
+            <div class="vw-st is-on"><span class="vw-st-k">01 · Dashboard</span><h3>Everything waiting on you, in one strip.</h3><p>Open CAPAs, paused checkpoints, OOS samples and lot releases awaiting e-signature, each one click from action.</p></div>
+            <div class="vw-st"><span class="vw-st-k">02 · MBR builder</span><h3>Design the process. Lock it when it’s right.</h3><p>Drag weighing, mixing, sampling and approval steps onto a canvas. Published versions are immutable, so every change becomes a new version.</p></div>
+            <div class="vw-st"><span class="vw-st-k">03 · Batch execution</span><h3>Guided steps. Signed on the record.</h3><p>Operators work step by step with lab results in line. Checkpoints pause the batch until a second person re-authenticates and signs.</p></div>
+            <div class="vw-st"><span class="vw-st-k">04 · AI assistant</span><h3>Ask about any batch. Get a cited answer.</h3><p>Ask in plain language about SOPs, batches, samples or lots. Every answer links to the records it came from, and it only answers from your own data.</p></div>
+            <div class="vw-st"><span class="vw-st-k">05 · AI proposals</span><h3>AI drafts. A person signs.</h3><p>Root causes, CAPAs and other actions drafted by the AI wait in one queue for an approver to review and sign. Nothing applies on its own.</p></div>
+            <div class="vw-st"><span class="vw-st-k">06 · Audit trail</span><h3>History that can’t be quietly rewritten.</h3><p>Every change is hashed to the one before it. BioSync verifies the chain on every view, and exports to JSON or CSV for inspectors.</p></div>
+          </div>
+          <div class="vw-rail" id="vw-rail">
+            <button type="button" class="is-on"><i></i><span>Dashboard</span></button>
+            <button type="button"><i></i><span>MBR builder</span></button>
+            <button type="button"><i></i><span>Batch execution</span></button>
+            <button type="button"><i></i><span>AI assistant</span></button>
+            <button type="button"><i></i><span>AI proposals</span></button>
+            <button type="button"><i></i><span>Audit trail</span></button>
+          </div>
+        </div>
+        <div class="vw-screen-wrap">
+          <div class="vw-screen" id="vw-screen">
+            <div class="vw-bar"><i></i><i></i><i></i><small id="vw-url">biosync / dashboard</small></div>
+            <div class="vw-screen-body">
+              <!-- SCREEN 1 · Dashboard — in Zoho, replace data-src with the image link from Zoho's media library -->
+              <div class="vw-sl is-on" data-url="biosync / dashboard">
+                <img class="vw-img" data-src="shots/1-dashboard.jpg" alt="BioSync dashboard showing pending actions" width="1600" height="874">
+                <div class="vw-ph">Screenshot 1</div>
+                <span class="vw-pin vw-pin--m" style="left:24%;top:16%">8 pending actions in one strip</span><span class="vw-pin vw-pin--b" style="right:13%;bottom:4%">Ask AI from any page</span>
+              </div>
+              <!-- SCREEN 2 · MBR builder — in Zoho, replace data-src with the image link from Zoho's media library -->
+              <div class="vw-sl" data-url="biosync / mbr / para-blend">
+                <img class="vw-img" data-src="shots/2-mbr-builder.jpg" alt="BioSync master batch record builder" width="1600" height="874">
+                <div class="vw-ph">Screenshot 2</div>
+                <span class="vw-pin vw-pin--m" style="right:3%;top:84%">Supervisor approval checkpoint</span><span class="vw-pin vw-pin--b" style="left:36%;top:12%">Published = immutable</span>
+              </div>
+              <!-- SCREEN 3 · Batch execution — in Zoho, replace data-src with the image link from Zoho's media library -->
+              <div class="vw-sl" data-url="biosync / executions / para-blend-0003">
+                <img class="vw-img" data-src="shots/3-batch-execution.jpg" alt="BioSync batch execution paused at an approval checkpoint" width="1600" height="874">
+                <div class="vw-ph">Screenshot 3</div>
+                <span class="vw-pin vw-pin--m" style="left:51%;top:70%">Re-authenticate to sign · Part 11</span><span class="vw-pin vw-pin--b" style="left:26%;top:55%">LIMS results in line</span>
+              </div>
+              <!-- SCREEN 4 · AI assistant — in Zoho, replace data-src with the image link from Zoho's media library -->
+              <div class="vw-sl" data-url="biosync / assistant">
+                <img class="vw-img" data-src="shots/4-ai-assistant.jpg" alt="BioSync AI assistant answering with cited sources" width="1600" height="874">
+                <div class="vw-ph">Screenshot 4</div>
+                <span class="vw-pin vw-pin--m" style="left:16%;top:39%">Every answer cites its source</span><span class="vw-pin vw-pin--b" style="left:46%;top:58%">Explains the OOS in plain words</span>
+              </div>
+              <!-- SCREEN 5 · AI proposals — in Zoho, replace data-src with the image link from Zoho's media library -->
+              <div class="vw-sl" data-url="biosync / ai-proposals">
+                <img class="vw-img" data-src="shots/5-ai-proposals.jpg" alt="BioSync AI proposals waiting for approval" width="1600" height="874">
+                <div class="vw-ph">Screenshot 5</div>
+                <span class="vw-pin vw-pin--m" style="right:13%;top:30%">Nothing applies until signed</span><span class="vw-pin vw-pin--b" style="left:36%;top:46%">Linked to the source CAPA</span>
+              </div>
+              <!-- SCREEN 6 · Audit trail — in Zoho, replace data-src with the image link from Zoho's media library -->
+              <div class="vw-sl" data-url="biosync / quality / audit-trail">
+                <img class="vw-img" data-src="shots/6-audit-trail.jpg" alt="BioSync hash-chained audit trail" width="1600" height="874">
+                <div class="vw-ph">Screenshot 6</div>
+                <span class="vw-pin vw-pin--m" style="left:53%;top:16%">Chain verified, no tampering</span><span class="vw-pin vw-pin--b" style="right:5%;top:46%">Each row hashed to the next</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statement: words light up as you scroll -->
+  <div class="vw-say" id="vw-say">
+    <div class="vw-say-stick">
+      <div class="vw-in">
+        <span class="vw-say-k">The BioSync guarantee</span>
+        <h2 id="vw-say-h">AI proposes. Your people sign. Every step is on the record.</h2>
+        <p>The Digital Brain drafts batch records, answers questions and suggests actions. Nothing executes without a qualified person's 21 CFR Part 11 e-signature, and every change lands in a hash-chained audit trail.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="vw-in vw-feats-sec">
+    <div class="vw-feats-head">
+      <h2 class="vw-rv">One platform from SOP to shipped lot.</h2>
+      <p class="vw-rv" data-d="1">Manufacturing, quality, warehouse and supply chain modules that share one data model and one audit trail.</p>
+    </div>
+    <div class="vw-feats" id="vw-feats">
+      <div class="vw-feat vw-rv"><div class="vw-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg></div><h3>Batch records from your SOPs</h3><p>Upload an SOP and get a draft MBR with steps, checkpoints and tolerances, ready for review.</p><span class="vw-feat-k">SOP → MBR</span></div>
+      <div class="vw-feat vw-rv" data-d="1"><div class="vw-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="9" width="6" height="6" rx="1.5"/><rect x="15" y="9" width="6" height="6" rx="1.5"/><path d="M9 12h6"/></svg></div><h3>Tamper-evident audit trail</h3><p>Hash-chained history and ALCOA+ data integrity. Any edit to the past breaks the chain and shows.</p><span class="vw-feat-k">ALCOA+</span></div>
+      <div class="vw-feat vw-rv" data-d="2"><div class="vw-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><h3>The full quality suite</h3><p>CAPA, change control, SOP control, LIMS, calibration, and training gates that block untrained operators.</p><span class="vw-feat-k">QMS · LIMS</span></div>
+      <div class="vw-feat vw-rv" data-d="1"><div class="vw-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20h16M7 20V10h10v10M12 10V5M9 5h6"/></svg></div><h3>Weighing and dispensing</h3><p>Tolerance checks on every weighing, hold-time tracking and full batch genealogy.</p><span class="vw-feat-k">SHOP FLOOR</span></div>
+      <div class="vw-feat vw-rv" data-d="2"><div class="vw-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5v14M7 5v14M10 5v14M14 5v14M16 5v14M20 5v14"/></svg></div><h3>Serialization and supply chain</h3><p>Unit-level GS1 serialization, lot release and a warehouse that knows what's quarantined, released or on hold.</p><span class="vw-feat-k">GS1 SGTIN · WMS</span></div>
+      <div class="vw-feat vw-rv" data-d="3"><div class="vw-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h8M7 11h10M10 16h10"/><path d="M4 3v18"/></svg></div><h3>Production scheduling</h3><p>Plan campaigns on a Gantt view and see retests, holds and releases in the same timeline.</p><span class="vw-feat-k">PLANNING</span></div>
+    </div>
+    <div class="vw-chips" aria-label="Compliance">
+      <div class="vw-chips-track">
+        <span class="vw-chip">21 CFR Part 11</span><span class="vw-chip">ALCOA+</span><span class="vw-chip">GxP</span><span class="vw-chip">GS1</span><span class="vw-chip">Single-tenant deployment</span><span class="vw-chip">Role-based access</span><span class="vw-chip">Training gates</span>
+        <span class="vw-chip" aria-hidden="true">21 CFR Part 11</span><span class="vw-chip" aria-hidden="true">ALCOA+</span><span class="vw-chip" aria-hidden="true">GxP</span><span class="vw-chip" aria-hidden="true">GS1</span><span class="vw-chip" aria-hidden="true">Single-tenant deployment</span><span class="vw-chip" aria-hidden="true">Role-based access</span><span class="vw-chip" aria-hidden="true">Training gates</span>
+      </div>
+    </div>
+  </div>
+
+  <svg class="vw-waves" viewBox="0 0 1440 130" preserveAspectRatio="none" aria-hidden="true">
+    <path class="w1" d="M-80 70 C 160 10, 360 120, 620 66 S 1080 10, 1300 62 S 1560 90, 1600 70 V130 H-80Z" fill="#14D2C2" opacity=".35"/>
+    <path class="w2" d="M-80 86 C 200 40, 420 130, 700 84 S 1120 40, 1340 82 S 1560 100, 1600 90 V130 H-80Z" fill="#FF6A3D" opacity=".3"/>
+    <path d="M0 100 C 240 70, 480 130, 720 100 S 1200 70, 1440 100 V130 H0Z" fill="#F3F6FB"/>
+  </svg>
+</section>
+
+<!-- ================= MEDICAL AI ================= -->
+<section class="vw-med vw-sec" id="vw-medical" data-tone="light">
+  <div class="vw-in vw-med-grid">
+    <div class="vw-med-sticky">
+      <span class="vw-eyebrow vw-rv">Medical AI</span>
+      <h2 class="vw-rv">From scan and report to <em>one clear case summary.</em></h2>
+      <p class="vw-med-lede vw-rv" data-d="1">Upload a CT, MRI, DICOM, pathology or endoscopy image, or a discharge summary or lab report. The system works out what it's looking at, runs the right model and returns structured findings.</p>
+      <div class="vw-scan vw-rv" data-d="2" aria-hidden="true">
+        <div class="vw-scan-ring"></div><div class="vw-scan-ring"></div><div class="vw-scan-ring"></div>
+        <div class="vw-scan-sweep"></div><div class="vw-scan-c"></div>
+        <span class="vw-scan-l" style="left:-6%;top:12%">MRI</span>
+        <span class="vw-scan-l" style="right:-4%;top:28%">CT</span>
+        <span class="vw-scan-l" style="left:2%;bottom:16%">Pathology</span>
+        <span class="vw-scan-l" style="right:0;bottom:6%">Endoscopy</span>
+      </div>
+    </div>
+    <div class="vw-flowcol" id="vw-flow">
+      <div class="vw-flowline"></div>
+      <div class="vw-step"><span class="vw-step-k">Step 1 · Screen</span><h3>Checks every upload first</h3><p>Detects the imaging modality and flags non-medical files before any analysis runs.</p><div class="vw-step-tags"><span>Modality detection</span><span>File screening</span></div></div>
+      <div class="vw-step"><span class="vw-step-k">Step 2 · Analyse</span><h3>Segments and classifies images</h3><p>MONAI models trace tumours, organs and ventricles, and classify endoscopic images.</p><div class="vw-step-tags"><span>BraTS brain tumour</span><span>Spleen CT</span><span>Ventricular MRI</span><span>Pathology nuclei</span><span>Endoscopy</span></div></div>
+      <div class="vw-step"><span class="vw-step-k">Step 3 · Read</span><h3>Understands the reports</h3><p>Pulls findings and consultation advice out of discharge summaries, lab reports and prescriptions.</p><div class="vw-step-tags"><span>PDF</span><span>DOCX</span><span>Text</span></div></div>
+      <div class="vw-step"><span class="vw-step-k">Step 4 · Consolidate</span><h3>One structured case report</h3><p>Images and reports from the same case become a single consolidated summary, with every inference traced.</p><div class="vw-step-tags"><span>Consolidated report</span><span>Clinical Q&amp;A</span><span>Full traceability</span></div></div>
+    </div>
+  </div>
+
+  <!-- MEDICAL AI SCREENSHOTS (hidden until links are added).
+       Paste each image link into data-src. The gallery shows itself automatically;
+       figures left empty are removed. -->
+  <div class="vw-in">
+    <div class="vw-medgal" id="vw-medgal" hidden>
+      <figure><img data-src="" alt="Medical AI upload screen"><figcaption>Upload and screen</figcaption></figure>
+      <figure><img data-src="" alt="Brain tumour segmentation"><figcaption>Brain tumour segmentation</figcaption></figure>
+      <figure><img data-src="" alt="Report analysis"><figcaption>Report analysis</figcaption></figure>
+      <figure><img data-src="" alt="Consolidated case report"><figcaption>Consolidated case report</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW WE BUILD ================= -->
+<section class="vw-build vw-sec" id="vw-build" data-tone="dark">
+  <div class="vw-in">
+    <div class="vw-build-head">
+      <div>
+        <span class="vw-eyebrow vw-rv">How we build</span>
+        <h2 class="vw-rv">Built for places where software <em>gets audited.</em></h2>
+      </div>
+      <p class="vw-rv" data-d="1">Regulated software has to be right the first time. Every Valiantwaves product goes through the same five steps before it reaches a client.</p>
+    </div>
+    <div class="vw-stack" id="vw-stack">
+      <article class="vw-card" style="--i:0">
+        <div class="vw-card-panel"><span class="vw-card-n">STEP 01</span><div><span class="vw-card-big">SOP</span><span class="vw-card-unit">first, code second</span></div></div>
+        <div class="vw-card-body"><h3>Start from your process</h3><p>We read your SOPs and walk your actual workflow before designing a screen, so the software matches how your floor and QA team really work.</p><ul class="vw-card-list"><li>SOP review</li><li>Workflow mapping</li><li>Compliance scope</li></ul></div>
+      </article>
+      <article class="vw-card" style="--i:1">
+        <div class="vw-card-panel"><span class="vw-card-n">STEP 02</span><div><span class="vw-card-big">A→C</span><span class="vw-card-unit">tiered roadmap</span></div></div>
+        <div class="vw-card-body"><h3>Ship in tiers you can see</h3><p>Foundations first, then verification, then the quality suite, then AI. Each tier is delivered, tested and signed off before the next starts.</p><ul class="vw-card-list"><li>Foundations</li><li>Quality suite</li><li>AI Digital Brain</li></ul></div>
+      </article>
+      <article class="vw-card" style="--i:2">
+        <div class="vw-card-panel"><span class="vw-card-n">STEP 03</span><div><span class="vw-card-big"><span data-count="950">0</span>+</span><span class="vw-card-unit">automated tests <span class="vw-tag">ok to show?</span></span></div></div>
+        <div class="vw-card-body"><h3>Validate every delivery</h3><p>Every build passes six automated gates and the full test suite, then a manual test playbook, before it's packaged for release.</p><ul class="vw-card-list"><li>Static checks</li><li>Full app import</li><li>API contract check</li><li>Manual playbook</li></ul></div>
+      </article>
+      <article class="vw-card" style="--i:3">
+        <div class="vw-card-panel"><span class="vw-card-n">STEP 04</span><div><span class="vw-card-big">1:1</span><span class="vw-card-unit">one client, one tenant</span></div></div>
+        <div class="vw-card-body"><h3>Deploy on your cloud</h3><p>A single-tenant install on your own infrastructure, licensed per seat. Your batch data never shares a database with anyone else.</p><ul class="vw-card-list"><li>Your cloud</li><li>Per-seat licence</li><li>Containerised</li></ul></div>
+      </article>
+      <article class="vw-card" style="--i:4">
+        <div class="vw-card-panel"><span class="vw-card-n">STEP 05</span><div><span class="vw-card-big">You</span><span class="vw-card-unit">sign every decision</span></div></div>
+        <div class="vw-card-body"><h3>Keep people in charge of the AI</h3><p>Our AI drafts, searches and proposes. Anything that changes a record waits for a qualified person and an e-signature.</p><ul class="vw-card-list"><li>Human-in-the-loop</li><li>E-signatures</li><li>Full audit trail</li></ul></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="vw-contact vw-sec" id="vw-contact" data-tone="dark">
+  <div class="vw-in">
+    <span class="vw-eyebrow vw-rv">Get in touch</span>
+    <h2 class="vw-rv">See BioSync running on <em>a real batch.</em></h2>
+    <div class="vw-contact-cta vw-rv" data-d="1">
+      <a class="vw-btn vw-btn--coral" href="#vw-contact" data-vw-demo>Book a demo <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="vw-cards">
+      <div class="vw-cc vw-rv"><small>Email</small><span class="vw-cc-v" data-vw-text="email"></span><div class="vw-cc-row"><a href="#" data-vw-href="email">Write to us</a><button class="vw-copy" type="button" data-vw-copy="email">Copy</button></div></div>
+      <div class="vw-cc vw-rv" data-d="1"><small>Phone</small><span class="vw-cc-v" data-vw-text="phone"></span><div class="vw-cc-row"><a href="#" data-vw-href="phone">Call us</a><button class="vw-copy" type="button" data-vw-copy="phone">Copy</button></div></div>
+      <div class="vw-cc vw-rv" data-d="2"><small>LinkedIn</small><span class="vw-cc-v">Valiantwaves</span><div class="vw-cc-row"><a href="https://www.linkedin.com/company/109285011/" target="_blank" rel="noopener">Follow us</a></div></div>
+    </div>
+    <div class="vw-foot-word" aria-hidden="true">Valiantwaves</div>
+    <div class="vw-foot"><span>© 2026 Valiantwaves · Raghunathan M, CEO</span><span>Software that thinks. AI that builds.</span></div>
+  </div>
+</section>
+
+</div><!-- /vw-over -->
+</div><!-- /vw -->
+
+<script>
+/* ====== EDIT HERE ======
+   email / phone: shown in Contact and used by the buttons.
+   demo: what "Book a demo" does. "email" opens a pre-filled email, "phone" starts a call. */
+var VW_CONTACT={
+  email:"hello@valiantwaves.com",
+  phone:"+91 00000 00000",
+  demo:"email",
+  demoSubject:"BioSync OS demo request"
+};
+/* ======================== */
+(function(){
+  var root=document.getElementById('vw'); if(!root) return;
+  var C=VW_CONTACT, tel='tel:'+String(C.phone).replace(/[^+\d]/g,''), mail='mailto:'+C.email;
+  root.querySelectorAll('[data-vw-text]').forEach(function(el){el.textContent=C[el.getAttribute('data-vw-text')]||''});
+  root.querySelectorAll('[data-vw-href]').forEach(function(el){el.href=el.getAttribute('data-vw-href')==='phone'?tel:mail});
+  root.querySelectorAll('[data-vw-copy]').forEach(function(el){el.setAttribute('data-copy',C[el.getAttribute('data-vw-copy')]||'')});
+  root.querySelectorAll('[data-vw-demo]').forEach(function(el){el.href=C.demo==='phone'?tel:mail+'?subject='+encodeURIComponent(C.demoSubject)});
+  root.classList.add('vw-js');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+  var VH=window.innerHeight;
+
+  /* ---- screenshots: fill data-src to show real images ---- */
+  root.querySelectorAll('.vw-sl').forEach(function(sl){
+    var im=sl.querySelector('.vw-img'); var u=im&&im.getAttribute('data-src');
+    if(u){im.src=u;sl.classList.add('has-img');}
+  });
+  var gal=document.getElementById('vw-medgal');
+  if(gal){var any=false;gal.querySelectorAll('figure').forEach(function(f){var im=f.querySelector('img');var u=im.getAttribute('data-src');if(u){im.src=u;any=true;}else f.remove();});if(any)gal.hidden=false;}
+
+  /* ---- mobile menu ---- */
+  var nav=document.getElementById('vw-nav'), bg=document.getElementById('vw-burger'), lk=document.getElementById('vw-links');
+  bg.addEventListener('click',function(){var o=lk.classList.toggle('is-open');bg.setAttribute('aria-expanded',o)});
+  lk.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){lk.classList.remove('is-open');bg.setAttribute('aria-expanded','false')})});
+  var navLinks=[].slice.call(lk.querySelectorAll('a:not(.vw-navcta)'));
+  var secs=[].slice.call(root.querySelectorAll('[data-tone]'));
+
+  /* ---- reveal ---- */
+  var rvs=[].slice.call(root.querySelectorAll('.vw-rv'));
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+    rvs.forEach(function(el){var r=el.getBoundingClientRect();if(r.top<VH)el.classList.add('is-in');else io.observe(el)});
+  } else rvs.forEach(function(el){el.classList.add('is-in')});
+
+  /* ---- statement words ---- */
+  var sayH=document.getElementById('vw-say-h'), words=[];
+  if(sayH){var t=sayH.textContent.trim().split(/\s+/);sayH.textContent='';t.forEach(function(w,k){var s=document.createElement('span');s.className='vw-w'+(/^(sign\.|record\.)$/.test(w)?' vw-w--a':'');s.textContent=w;sayH.appendChild(s);if(k<t.length-1)sayH.appendChild(document.createTextNode(' '));words.push(s)})}
+
+  /* ---- showcase ---- */
+  var show=document.getElementById('vw-show'), slides=[].slice.call(show.querySelectorAll('.vw-sl')), sts=[].slice.call(show.querySelectorAll('.vw-st')), rail=[].slice.call(show.querySelectorAll('.vw-rail button')), url=document.getElementById('vw-url'), cur=0, ENTER=.16;
+  function setStage(k){
+    if(k===cur) return;
+    var prev=slides[cur]; slides.forEach(function(s){s.classList.remove('is-out')});
+    prev.classList.remove('is-on'); prev.classList.add('is-out');
+    slides[k].classList.add('is-on'); setTimeout(function(){prev.classList.remove('is-out')},900);
+    sts.forEach(function(s,i){s.classList.toggle('is-on',i===k)});
+    rail.forEach(function(b,i){b.classList.toggle('is-on',i===k);b.classList.toggle('is-done',i<k)});
+    url.textContent=slides[k].getAttribute('data-url'); cur=k;
+  }
+  rail.forEach(function(b,i){b.addEventListener('click',function(){
+    var r=show.getBoundingClientRect(), top=window.scrollY+r.top, tot=show.offsetHeight-VH;
+    var p=ENTER+(1-ENTER)*(i+.5)/slides.length; window.scrollTo({top:top+tot*p,behavior:reduce?'auto':'smooth'});
+  })});
+
+  /* ---- feature spotlight ---- */
+  root.querySelectorAll('.vw-feat').forEach(function(c){c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')})});
+
+  /* ---- copy buttons ---- */
+  root.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
+    var v=b.getAttribute('data-copy'), done=function(){var o=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=o},1500)};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(v).then(done,function(){sel(b)})}else sel(b);
+  })});
+  function sel(b){var t=b.closest('.vw-cc').querySelector('.vw-cc-v');var r=document.createRange();r.selectNodeContents(t);var s=window.getSelection();s.removeAllRanges();s.addRange(r)}
+
+  /* ---- count up ---- */
+  var counted=false, cnt=root.querySelector('[data-count]');
+  function countUp(){if(counted||!cnt)return;counted=true;var end=+cnt.getAttribute('data-count');if(reduce){cnt.textContent=end;return}var t0=null;function f(t){if(!t0)t0=t;var k=clamp((t-t0)/1400,0,1);cnt.textContent=Math.round(end*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+
+  /* ---- scroll engine ---- */
+  var hero=document.getElementById('vw-home'), bio=document.getElementById('vw-biosync'), giant=document.getElementById('vw-giant'), say=document.getElementById('vw-say'), flow=document.getElementById('vw-flow'), steps=[].slice.call(flow.querySelectorAll('.vw-step')), cards=[].slice.call(root.querySelectorAll('.vw-card'));
+  var heroH=0;
+  function pinP(el){var r=el.getBoundingClientRect(), tot=el.offsetHeight-VH; return tot<=0?0:clamp(-r.top/tot,0,1)}
+  function onScroll(){
+    ticking=false;
+    // hero recedes as BioSync rises
+    var br=bio.getBoundingClientRect(); heroH=clamp(1-br.top/VH,0,1); hero.style.setProperty('--h',heroH.toFixed(3));
+    // giant word fills
+    var gr=giant.getBoundingClientRect(); giant.style.setProperty('--fill',clamp((VH*.95-gr.top)/(VH*.6),0,1).toFixed(3));
+    // showcase
+    var p=pinP(show), en=clamp(p/ENTER,0,1); en=en<.5?2*en*en:1-Math.pow(-2*en+2,2)/2;
+    show.style.setProperty('--enter',en.toFixed(3));
+    setStage(p<ENTER?0:Math.min(slides.length-1,Math.floor((p-ENTER)/((1-ENTER)/slides.length))));
+    // statement
+    var sp=pinP(say), lit=Math.round(clamp((sp-.05)/.75,0,1)*words.length); words.forEach(function(w,i){w.classList.toggle('is-lit',i<lit)});
+    // medical flow line
+    var fr=flow.getBoundingClientRect(), mp=clamp((VH*.62-fr.top)/fr.height,0,1); flow.style.setProperty('--mp',mp.toFixed(3));
+    steps.forEach(function(s){var r=s.getBoundingClientRect();s.classList.toggle('is-lit',r.top+30<VH*.62)});
+    // stacking cards dim as the next one covers them
+    cards.forEach(function(c,i){var n=cards[i+1];if(!n){c.style.setProperty('--cov',0);return}var a=c.getBoundingClientRect(),b=n.getBoundingClientRect();c.style.setProperty('--cov',clamp(1-(b.top-a.top)/a.height,0,1).toFixed(3))});
+    if(cards[2]&&cards[2].getBoundingClientRect().top<VH*.8) countUp();
+    // nav tone + active link
+    var cur2=secs[0]; secs.forEach(function(s){if(s.getBoundingClientRect().top<=40)cur2=s});
+    nav.classList.toggle('is-dark',cur2.getAttribute('data-tone')==='dark');
+    var id=cur2.id; navLinks.forEach(function(a){a.classList.toggle('is-on',a.getAttribute('href')==='#'+id)});
+  }
+  var ticking=false;
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
+  window.addEventListener('resize',function(){VH=window.innerHeight;sizeCv();onScroll()});
+
+  /* ---- hero waves canvas ---- */
+  var cv=document.getElementById('vw-cv'), ctx=cv.getContext('2d'), W=0,H=0,dpr=1, mx=.5;
+  function sizeCv(){dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+  var layers=[
+    {c:'47,69,115',a:.10,base:.70,amp:46,f:.0042,s:.00035,ph:0,line:.55},
+    {c:'20,210,194',a:.12,base:.74,amp:38,f:.0056,s:-.00045,ph:1.6,line:.9},
+    {c:'255,106,61',a:.10,base:.80,amp:30,f:.0068,s:.00055,ph:3.1,line:.8},
+    {c:'255,197,61',a:.08,base:.86,amp:22,f:.0082,s:-.0006,ph:4.4,line:.7}
+  ];
+  root.addEventListener('pointermove',function(e){if(heroH<1)mx=e.clientX/(W||1)},{passive:true});
+  function draw(t){
+    if(heroH<1){
+      ctx.clearRect(0,0,W,H); var narrow=W<700, k=narrow?.6:1;
+      layers.forEach(function(L){
+        ctx.beginPath(); var amp=L.amp*k*(1+(mx-.5)*.5);
+        for(var x=0;x<=W+10;x+=8){var y=H*L.base+Math.sin(x*L.f/k+t*L.s+L.ph)*amp+Math.sin(x*L.f*2.3/k-t*L.s*1.4)*amp*.35;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+        ctx.strokeStyle='rgba('+L.c+','+L.line+')';ctx.lineWidth=2;ctx.stroke();
+        ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();
+        var g=ctx.createLinearGradient(0,H*L.base-amp,0,H);g.addColorStop(0,'rgba('+L.c+','+L.a+')');g.addColorStop(1,'rgba('+L.c+',0)');ctx.fillStyle=g;ctx.fill();
+      });
+    }
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  sizeCv(); onScroll(); requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>
