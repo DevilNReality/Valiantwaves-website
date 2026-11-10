@@ -223,7 +223,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vw-feat:nth-child(3n) .vw-ico{background:rgba(255,106,61,.12);color:var(--coral)}
 .vw-feat h3{font-size:21px;font-weight:700;color:#fff;letter-spacing:-.01em}
 .vw-feat p{color:var(--on-dark-mute);font-size:15.5px}
-.vw-feat-k{font-family:var(--mono);font-size:11.5px;color:var(--on-dark-mute);letter-spacing:.08em;margin-top:auto;padding-top:6px}
+.vw-feat-k{font-family:var(--mono);font-size:12px;color:#CBD7EC;font-weight:500;letter-spacing:.08em;margin-top:auto;padding-top:6px}
+@media (max-width:600px){.vw-feat-k{color:#DCE6F6;font-size:12.5px}}
 @media (max-width:960px){.vw-feats{grid-template-columns:1fr 1fr}}
 @media (max-width:600px){.vw-feats{grid-template-columns:1fr}}
 .vw-chips{margin-top:44px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
@@ -311,7 +312,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vw-contact h2 em{font-style:normal;background:linear-gradient(90deg,var(--aqua),var(--sun),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
 .vw-contact-cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
 .vw .vw-btn--coral{background:var(--coral);color:#fff;box-shadow:0 12px 34px -10px rgba(255,106,61,.8)}
-.vw-cards{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.vw-cards{margin-top:56px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .vw-cc{border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px;background:rgba(255,255,255,.03);min-width:0;transition:border-color .3s,background .3s}
 .vw-cc:hover{border-color:rgba(20,210,194,.5);background:rgba(20,210,194,.05)}
 .vw-cc small{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-mute)}
@@ -323,6 +324,49 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vw-foot{margin-top:80px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--on-dark-mute);font-family:var(--mono)}
 .vw-foot-word{font-family:var(--display);font-weight:800;font-size:clamp(48px,13vw,210px);letter-spacing:-.05em;line-height:.8;margin-top:60px;color:transparent;-webkit-text-stroke:1px rgba(234,240,250,.14);white-space:nowrap;text-align:center}
 
+
+/* ---------- MEDICAL AI PRODUCT HEADER (mirrors the BioSync OS header) ---------- */
+.vw-med-intro{padding-bottom:clamp(30px,4.5vw,56px)}
+.vw-giant--med{color:transparent;-webkit-text-stroke:1.5px rgba(10,21,48,.2);
+  background:linear-gradient(90deg,var(--coral) 0%,#FF9A6E calc(var(--fill,0)*100%),transparent calc(var(--fill,0)*100% + .5%));
+  -webkit-background-clip:text;background-clip:text}
+.vw-med .vw-med-sticky h2{margin-top:0}
+
+/* ---------- DEMO FORM (modal) ---------- */
+.vw-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px))}
+.vw-modal[hidden]{display:none}
+.vw-modal-bg{position:absolute;inset:0;background:rgba(5,10,23,.74);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:vwFade .3s both}
+.vw-modal-card{position:relative;width:min(580px,100%);max-height:100%;overflow:auto;background:var(--card);color:var(--ink);border-radius:24px;padding:clamp(22px,4vw,38px);box-shadow:0 40px 100px -30px rgba(5,10,23,.8);animation:vwPop .4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes vwPop{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+.vw-modal-x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0}
+.vw-modal-x:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.vw-modal-card .vw-eyebrow{color:var(--coral)}
+.vw-modal-card h3{font-size:clamp(26px,4vw,34px);font-weight:800;margin-top:12px;max-width:16ch}
+.vw .vw-modal-sub{color:var(--muted);margin-top:10px;font-size:15.5px;max-width:46ch}
+.vw-form{margin-top:22px;display:grid;gap:16px}
+.vw-row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:560px){.vw-row2{grid-template-columns:1fr}}
+.vw-fld{display:flex;flex-direction:column;gap:6px;min-width:0;border:0;padding:0;margin:0}
+.vw-fld>label,.vw-fld>legend{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:0}
+.vw-fld input[type=text],.vw-fld input[type=tel],.vw-fld input[type=email],.vw-fld textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;transition:border-color .2s,box-shadow .2s,background .2s;-webkit-appearance:none;appearance:none}
+.vw-fld textarea{resize:vertical;min-height:112px}
+.vw-fld input:focus,.vw-fld textarea:focus{outline:none;border-color:var(--coral);background:#fff;box-shadow:0 0 0 4px rgba(255,106,61,.15)}
+.vw-fld [aria-invalid="true"]{border-color:#D6334A}
+.vw-err{color:#C0263D;font-size:13px;min-height:0}
+.vw-opts{display:flex;flex-wrap:wrap;gap:8px}
+.vw-opt{position:relative;cursor:pointer}
+.vw-opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.vw-opt span{display:inline-block;padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);font-size:14.5px;font-weight:500;transition:all .2s}
+.vw-opt:hover span{border-color:var(--navy)}
+.vw-opt input:checked+span{background:var(--ink);border-color:var(--ink);color:#fff}
+.vw-opt input:focus-visible+span{outline:2px solid var(--coral);outline-offset:3px}
+.vw-trap{display:none!important}
+.vw-send{width:100%;justify-content:center;margin-top:4px}
+.vw-send[disabled]{opacity:.7;cursor:progress;transform:none}
+.vw-status{font-size:14.5px;color:#C0263D;min-height:0}
+.vw-done{text-align:left}
+.vw-done-ic{width:52px;height:52px;border-radius:50%;background:rgba(20,210,194,.16);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.vw-done .vw-btn{margin-top:22px}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .vw *,.vw *::before,.vw *::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
@@ -504,9 +548,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 <!-- ================= MEDICAL AI ================= -->
 <section class="vw-med vw-sec" id="vw-medical" data-tone="light">
+  <div class="vw-in vw-med-intro">
+    <span class="vw-eyebrow vw-rv">Secondary product</span>
+    <div class="vw-giant vw-giant--med" id="vw-giant-med" aria-label="Medical AI">Medical AI</div>
+  </div>
   <div class="vw-in vw-med-grid">
     <div class="vw-med-sticky">
-      <span class="vw-eyebrow vw-rv">Medical AI</span>
       <h2 class="vw-rv">From scan and report to <em>one clear case summary.</em></h2>
       <p class="vw-med-lede vw-rv" data-d="1">Upload a CT, MRI, DICOM, pathology or endoscopy image, or a discharge summary or lab report. The system works out what it's looking at, runs the right model and returns structured findings.</p>
       <div class="vw-scan vw-rv" data-d="2" aria-hidden="true">
@@ -585,7 +632,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     </div>
     <div class="vw-cards">
       <div class="vw-cc vw-rv"><small>Email</small><span class="vw-cc-v" data-vw-text="email"></span><div class="vw-cc-row"><a href="#" data-vw-href="email">Write to us</a><button class="vw-copy" type="button" data-vw-copy="email">Copy</button></div></div>
-      <div class="vw-cc vw-rv" data-d="1"><small>Phone</small><span class="vw-cc-v" data-vw-text="phone"></span><div class="vw-cc-row"><a href="#" data-vw-href="phone">Call us</a><button class="vw-copy" type="button" data-vw-copy="phone">Copy</button></div></div>
       <div class="vw-cc vw-rv" data-d="2"><small>LinkedIn</small><span class="vw-cc-v">Valiantwaves</span><div class="vw-cc-row"><a href="https://www.linkedin.com/company/109285011/" target="_blank" rel="noopener">Follow us</a></div></div>
     </div>
     <div class="vw-foot-word" aria-hidden="true">Valiantwaves</div>
@@ -594,26 +640,66 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 </section>
 
 </div><!-- /vw-over -->
+
+<!-- ================= BOOK A DEMO FORM ================= -->
+<div class="vw-modal" id="vw-modal" role="dialog" aria-modal="true" aria-labelledby="vw-modal-t" hidden>
+  <div class="vw-modal-bg" data-vw-close></div>
+  <div class="vw-modal-card">
+    <button class="vw-modal-x" type="button" aria-label="Close" data-vw-close>&times;</button>
+    <div id="vw-form-view">
+      <span class="vw-eyebrow">Book a demo</span>
+      <h3 id="vw-modal-t">Tell us what you need.</h3>
+      <p class="vw-modal-sub">Share a few details and our team will get back to you to set up the demo.</p>
+      <form class="vw-form" id="vw-form" novalidate>
+        <div class="vw-fld"><label for="vw-f-name">Name</label><input type="text" id="vw-f-name" name="name" autocomplete="name" maxlength="120" required><small class="vw-err" id="vw-e-name" aria-live="polite"></small></div>
+        <div class="vw-row2">
+          <div class="vw-fld"><label for="vw-f-phone">Phone number</label><input type="tel" id="vw-f-phone" name="phone" autocomplete="tel" inputmode="tel" maxlength="24" required><small class="vw-err" id="vw-e-phone" aria-live="polite"></small></div>
+          <div class="vw-fld"><label for="vw-f-email">Email ID</label><input type="email" id="vw-f-email" name="email" autocomplete="email" maxlength="160" required><small class="vw-err" id="vw-e-email" aria-live="polite"></small></div>
+        </div>
+        <fieldset class="vw-fld">
+          <legend>Interested in</legend>
+          <div class="vw-opts">
+            <label class="vw-opt"><input type="radio" name="product" value="BioSync OS" required><span>BioSync OS</span></label>
+            <label class="vw-opt"><input type="radio" name="product" value="Medical AI"><span>Medical AI</span></label>
+            <label class="vw-opt"><input type="radio" name="product" value="New product"><span>New product</span></label>
+          </div>
+          <small class="vw-err" id="vw-e-product" aria-live="polite"></small>
+        </fieldset>
+        <div class="vw-fld"><label for="vw-f-msg">Requirements / description</label><textarea id="vw-f-msg" name="message" maxlength="3000" required></textarea><small class="vw-err" id="vw-e-message" aria-live="polite"></small></div>
+        <input type="checkbox" name="botcheck" class="vw-trap" tabindex="-1" autocomplete="off">
+        <button class="vw-btn vw-btn--coral vw-send" id="vw-send" type="submit">Send request <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <p class="vw-status" id="vw-status" role="alert"></p>
+      </form>
+    </div>
+    <div class="vw-done" id="vw-done" hidden>
+      <div class="vw-done-ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M5 13.5l5 5 11-11" stroke="#0E9E91" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3 id="vw-done-h">Request received.</h3>
+      <p class="vw-modal-sub" id="vw-done-p">Our team will reach out on the email or phone number you shared.</p>
+      <button class="vw-btn vw-btn--ghost" type="button" data-vw-close>Close</button>
+    </div>
+  </div>
+</div>
 </div><!-- /vw -->
 
 <script>
 /* ====== EDIT HERE ======
-   email / phone: shown in Contact and used by the buttons.
-   demo: what "Book a demo" does. "email" opens a pre-filled email, "phone" starts a call. */
+   VW_CONTACT: the email shown in the Contact section (public).
+   VW_FORM.endpoint: the Google Apps Script "Web app" URL that receives the "Book a demo" form
+     and emails your team. The three receiving email IDs are set inside that script
+     (apps-script/Code.gs), not on this page. Setup steps are in README.md. */
 var VW_CONTACT={
-  email:"hello@valiantwaves.com",
-  phone:"+91 00000 00000",
-  demo:"email",
-  demoSubject:"BioSync OS demo request"
+  email:"consulting@valiantwaves.com"
+};
+var VW_FORM={
+  endpoint:"https://script.google.com/macros/s/AKfycbwMxCoieiIhmp8uIZP_5nKmetMYYm_Xq15UCaMONLajtmtjSzOrMGsVzimQXTIqAMU6rA/exec"
 };
 /* ======================== */
 (function(){
   var root=document.getElementById('vw'); if(!root) return;
-  var C=VW_CONTACT, tel='tel:'+String(C.phone).replace(/[^+\d]/g,''), mail='mailto:'+C.email;
+  var C=VW_CONTACT, mail='mailto:'+C.email;
   root.querySelectorAll('[data-vw-text]').forEach(function(el){el.textContent=C[el.getAttribute('data-vw-text')]||''});
-  root.querySelectorAll('[data-vw-href]').forEach(function(el){el.href=el.getAttribute('data-vw-href')==='phone'?tel:mail});
+  root.querySelectorAll('[data-vw-href]').forEach(function(el){el.href=mail});
   root.querySelectorAll('[data-vw-copy]').forEach(function(el){el.setAttribute('data-copy',C[el.getAttribute('data-vw-copy')]||'')});
-  root.querySelectorAll('[data-vw-demo]').forEach(function(el){el.href=C.demo==='phone'?tel:mail+'?subject='+encodeURIComponent(C.demoSubject)});
   root.classList.add('vw-js');
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
@@ -633,6 +719,76 @@ var VW_CONTACT={
   lk.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){lk.classList.remove('is-open');bg.setAttribute('aria-expanded','false')})});
   var navLinks=[].slice.call(lk.querySelectorAll('a:not(.vw-navcta)'));
   var secs=[].slice.call(root.querySelectorAll('[data-tone]'));
+
+
+  /* ---- Book a demo form (Web3Forms) ---- */
+  var modal=document.getElementById('vw-modal'), form=document.getElementById('vw-form'), fview=document.getElementById('vw-form-view'), doneV=document.getElementById('vw-done'), statusEl=document.getElementById('vw-status'), sendBtn=document.getElementById('vw-send'), sendHTML=sendBtn.innerHTML, sending=false, lastFocus=null;
+  function focusables(){return [].slice.call(modal.querySelectorAll('button,input,textarea,a[href]')).filter(function(e){return !e.disabled&&e.offsetParent!==null&&e.type!=='hidden'})}
+  function openModal(){
+    lastFocus=document.activeElement;
+    fview.hidden=false; doneV.hidden=true; statusEl.textContent='';
+    modal.hidden=false; document.documentElement.style.overflow='hidden';
+    setTimeout(function(){var f=document.getElementById('vw-f-name'); if(f) f.focus()},60);
+  }
+  function closeModal(){
+    modal.hidden=true; document.documentElement.style.overflow='';
+    if(!doneV.hidden){form.reset()}
+    if(lastFocus&&lastFocus.focus) lastFocus.focus();
+  }
+  root.querySelectorAll('[data-vw-demo]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();openModal()})});
+  modal.querySelectorAll('[data-vw-close]').forEach(function(el){el.addEventListener('click',closeModal)});
+  document.addEventListener('keydown',function(e){
+    if(modal.hidden) return;
+    if(e.key==='Escape'){closeModal();return}
+    if(e.key==='Tab'){var f=focusables(); if(!f.length) return; var a=f[0], z=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()} else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}
+  });
+
+  var rules={
+    name:function(v){return v.trim().length>=2||'Please enter your name.'},
+    phone:function(v){var d=v.replace(/\D/g,''); return (/^[+\d\s().-]+$/.test(v.trim())&&d.length>=7&&d.length<=15)||'Please enter a valid phone number.'},
+    email:function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())||'Please enter a valid email address.'},
+    message:function(v){return v.trim().length>=10||'Please tell us a little about what you need.'}
+  };
+  function setErr(k,msg){
+    var el=document.getElementById('vw-e-'+k); if(el) el.textContent=msg||'';
+    var inp=form.elements[k]; if(inp&&inp.setAttribute&&k!=='product') inp.setAttribute('aria-invalid',msg?'true':'false');
+  }
+  function validate(){
+    var ok=true, first=null;
+    Object.keys(rules).forEach(function(k){var r=rules[k](form.elements[k].value); if(r!==true){setErr(k,r);ok=false;if(!first)first=form.elements[k]} else setErr(k,'')});
+    var picked=form.querySelector('input[name="product"]:checked');
+    if(!picked){setErr('product','Please choose one.');ok=false;if(!first)first=form.querySelector('input[name="product"]')} else setErr('product','');
+    if(first) first.focus();
+    return ok;
+  }
+  ['name','phone','email','message'].forEach(function(k){form.elements[k].addEventListener('input',function(){if(form.elements[k].getAttribute('aria-invalid')==='true'){var r=rules[k](form.elements[k].value); if(r===true) setErr(k,'')}})});
+  form.querySelectorAll('input[name="product"]').forEach(function(r){r.addEventListener('change',function(){setErr('product','')})});
+
+  function showDone(name){
+    document.getElementById('vw-done-h').textContent='Thank you'+(name?', '+name.trim().split(/\s+/)[0]:'')+'.';
+    fview.hidden=true; doneV.hidden=false;
+    var b=doneV.querySelector('button'); if(b) b.focus();
+  }
+  function fail(){statusEl.textContent="We couldn't send your request just now. Please try again, or email us at "+C.email+".";}
+  function resetBtn(){sending=false;sendBtn.disabled=false;sendBtn.innerHTML=sendHTML}
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault(); if(sending) return;
+    statusEl.textContent='';
+    if(!validate()) return;
+    var d={name:form.elements.name.value.trim(),phone:form.elements.phone.value.trim(),email:form.elements.email.value.trim(),product:form.querySelector('input[name="product"]:checked').value,message:form.elements.message.value.trim()};
+    if(form.elements.botcheck.checked){showDone(d.name);return}   // bots tick the hidden box: pretend success, send nothing
+    var url=String(VW_FORM.endpoint||'');
+    if(!/^https:\/\/script\.google\.com\//.test(url)){console.error('Valiantwaves: set VW_FORM.endpoint in index.html');fail();return}
+    sending=true; sendBtn.disabled=true; sendBtn.textContent='Sending…';
+    var ctl=('AbortController' in window)?new AbortController():null, to=setTimeout(function(){if(ctl)ctl.abort()},20000);
+    // text/plain keeps this a "simple" request, so the browser sends it without a CORS preflight (Apps Script can't answer one)
+    fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d),signal:ctl?ctl.signal:undefined})
+      .then(function(r){return r.json()})
+      .then(function(j){clearTimeout(to);resetBtn();if(j&&j.ok)showDone(d.name);else fail()})
+      .catch(function(err){clearTimeout(to);console.error('Valiantwaves form error',err);resetBtn();fail()});
+  });
 
   /* ---- reveal ---- */
   var rvs=[].slice.call(root.querySelectorAll('.vw-rv'));
@@ -685,6 +841,7 @@ var VW_CONTACT={
     var br=bio.getBoundingClientRect(); heroH=clamp(1-br.top/VH,0,1); hero.style.setProperty('--h',heroH.toFixed(3));
     // giant word fills
     var gr=giant.getBoundingClientRect(); giant.style.setProperty('--fill',clamp((VH*.95-gr.top)/(VH*.6),0,1).toFixed(3));
+    var gm=document.getElementById('vw-giant-med'); if(gm){var mr=gm.getBoundingClientRect(); gm.style.setProperty('--fill',clamp((VH*.95-mr.top)/(VH*.6),0,1).toFixed(3))}
     // showcase
     var p=pinP(show), en=clamp(p/ENTER,0,1); en=en<.5?2*en*en:1-Math.pow(-2*en+2,2)/2;
     show.style.setProperty('--enter',en.toFixed(3));
